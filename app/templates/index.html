@@ -1,0 +1,49 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+	<div class="col-12">
+        <div class="msg-form">
+            <form action="/submit" id="textform" method="post">
+                <div class="form-group">
+                    <label for="content">Mensaje</label>
+                    <textarea class="form-control" name="content" rows="4" cols="50" placeholder="Escribe lo que quieras ..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="author">Autor</label>
+                    <input class="form-control" type="text" name="author" placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg">Enviar Mensaje</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+	<div class="col-12 mt-4 mb-4 text-center">
+        <a href="{{node_address}}/mine" target="_blank" class="btn btn-warning">Solicitud para minar</a>
+        <a href="/" class="btn btn-outline-info">Resync</a>
+    </div>
+
+	<div class="col-12">
+        {% for post in posts %}
+        <div class="post_box">
+           <div class="post_box-header">
+              {#<div class="post_box-options">
+                  <button class="btn btn-danger">Responder</button>
+              </div>#}
+              <div class="post_box-avatar">{{post.author[0]}}</div>
+              <div class="name-header">{{post.author}}</div>
+              <div class="post_box-subtitle"> Posted at <i>{{readable_time(post.timestamp)}}</i></div>
+           </div>
+           <div>
+              <div class="post_box-body">
+                 <p>{{post.content}}</p>
+              </div>
+           </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
